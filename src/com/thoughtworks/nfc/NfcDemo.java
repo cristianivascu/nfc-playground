@@ -15,30 +15,48 @@ public class NfcDemo {
 
             CardChannel channel = card.getBasicChannel();
 
-            byte[] loadKey = {(byte)0xFF, (byte)0x82, 0x00, 0x00, 0x06, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF};
-            byte[] authentication = {(byte)0xFF, (byte)0x86, 0x00, 0x00, 0x05, 0x01, 0x00, 0x04, 0x60, 0x00};
-            byte[] readData = {(byte)0xFF, (byte)0xB0, 0x00, 0x04, 0x10};
-
-            CommandAPDU loadKeyCommand = new CommandAPDU(loadKey);
-            CommandAPDU authenticationCommand = new CommandAPDU(authentication);
-            CommandAPDU readDataCommand = new CommandAPDU(readData);
-
-            ResponseAPDU responseLoadKey = channel.transmit(loadKeyCommand);
-            ResponseAPDU responseAuthentication = channel.transmit(authenticationCommand);
-            ResponseAPDU responseReadData = channel.transmit(readDataCommand);
+//            byte[] loadKey = {(byte)0xFF, (byte)0x82, 0x00, 0x00, 0x06, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF};
+//            byte[] authentication = {(byte)0xFF, (byte)0x86, 0x00, 0x00, 0x05, 0x01, 0x00, 0x04, 0x60, 0x00};
 
 
-            System.out.println(responseLoadKey.getSW1());
-            System.out.println(responseLoadKey.getSW1());
+            for(int i = 4; i<39; i+=1){
+                byte[] readData = {(byte)0xFF, (byte)0xB0, 0x00, (byte)i, (byte)0x04};
+                CommandAPDU readDataCommand = new CommandAPDU(readData);
+                ResponseAPDU responseReadData = channel.transmit(readDataCommand);
 
-            System.out.println(responseAuthentication.getSW1());
-            System.out.println(responseAuthentication.getSW2());
+                System.out.println(responseReadData.getSW1());
+                System.out.println(responseReadData.getSW2());
 
-            System.out.println(responseReadData.getSW1());
-            System.out.println(responseReadData.getSW2());
+                StringBuilder sb = new StringBuilder();
+                for(byte b : responseReadData.getBytes())
+                    sb.append(String.format("%02X ", b));
+                System.out.println(sb.toString());
 
-            for(byte b : responseReadData.getData())
-                System.out.print(b);
+            }
+
+//            CommandAPDU loadKeyCommand = new CommandAPDU(loadKey);
+//            CommandAPDU authenticationCommand = new CommandAPDU(authentication);
+ //           CommandAPDU readDataCommand = new CommandAPDU(readData);
+
+//            ResponseAPDU responseLoadKey = channel.transmit(loadKeyCommand);
+//            ResponseAPDU responseAuthentication = channel.transmit(authenticationCommand);
+//            ResponseAPDU responseReadData = channel.transmit(readDataCommand);
+
+
+//            System.out.println(responseLoadKey.getSW1());
+//            System.out.println(responseLoadKey.getSW1());
+//
+//            System.out.println(responseAuthentication.getSW1());
+//            System.out.println(responseAuthentication.getSW2());
+
+//            System.out.println(responseReadData.getSW1());
+//            System.out.println(responseReadData.getSW2());
+//
+//            StringBuilder sb = new StringBuilder();
+//            for(byte b : responseReadData.getData())
+//                sb.append(String.format("%02X ", b));
+//            System.out.println(sb.toString());
+;
         }
     }
 }
