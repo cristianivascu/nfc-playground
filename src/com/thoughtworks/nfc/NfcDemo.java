@@ -24,8 +24,8 @@ public class NfcDemo {
                 CommandAPDU readDataCommand = new CommandAPDU(readData);
                 ResponseAPDU responseReadData = channel.transmit(readDataCommand);
 
-                System.out.println(responseReadData.getSW1());
-                System.out.println(responseReadData.getSW2());
+//                System.out.println(responseReadData.getSW1());
+//                System.out.println(responseReadData.getSW2());
 
                 StringBuilder sb = new StringBuilder();
                 for(byte b : responseReadData.getBytes())
@@ -34,9 +34,28 @@ public class NfcDemo {
 
             }
 
-            byte[] writeData = {(byte)0xFF, (byte)0xD6, 0x00, (byte)0x06,  0x10, (byte)0xD67, (byte)0x6F, (byte)0x6F, (byte)0x2E, (byte)0x67,(byte)0x6C,(byte)0x2F,(byte)0x6B,(byte)0x47,(byte)0x6E,(byte)0x77,(byte)0x78,(byte)0x45,(byte)0xFE,(byte)0x00,(byte)0x00};
-            CommandAPDU writeDataCommand = new CommandAPDU(writeData);
+            byte[] writeData1 = {(byte)0xFF, (byte)0xD6, 0x00, (byte)0x04,  0x04, (byte)0x01, (byte)0x03, (byte)0xA0, (byte)0x10};
+            byte[] writeData2 = {(byte)0xFF, (byte)0xD6, 0x00, (byte)0x05,  0x04, (byte)0x44, (byte)0x03, (byte)0x12, (byte)0xD1};
+            byte[] writeData3 = {(byte)0xFF, (byte)0xD6, 0x00, (byte)0x06,  0x04, (byte)0x01, (byte)0x0E, (byte)0x55, (byte)0x04};
+            byte[] writeData4 = {(byte)0xFF, (byte)0xD6, 0x00, (byte)0x07,  0x04, (byte)0x67, (byte)0x6F, (byte)0x6F, (byte)0x2E};
+            byte[] writeData5 = {(byte)0xFF, (byte)0xD6, 0x00, (byte)0x08,  0x04, (byte)0x67, (byte)0x6C, (byte)0x2F, (byte)0x6B};
+            byte[] writeData6 = {(byte)0xFF, (byte)0xD6, 0x00, (byte)0x09,  0x04, (byte)0x47, (byte)0x6E, (byte)0x77, (byte)0x78};
+            byte[] writeData7 = {(byte)0xFF, (byte)0xD6, 0x00, (byte)0x0A,  0x04, (byte)0x45, (byte)0xFE, (byte)0x00, (byte)0x00};
+
+            CommandAPDU writeDataCommand = new CommandAPDU(writeData1);
             ResponseAPDU responseWriteData = channel.transmit(writeDataCommand);
+            writeDataCommand = new CommandAPDU(writeData2);
+            responseWriteData = channel.transmit(writeDataCommand);
+            writeDataCommand = new CommandAPDU(writeData3);
+            responseWriteData = channel.transmit(writeDataCommand);
+            writeDataCommand = new CommandAPDU(writeData4);
+            responseWriteData = channel.transmit(writeDataCommand);
+            writeDataCommand = new CommandAPDU(writeData5);
+            responseWriteData = channel.transmit(writeDataCommand);
+            writeDataCommand = new CommandAPDU(writeData6);
+            responseWriteData = channel.transmit(writeDataCommand);
+            writeDataCommand = new CommandAPDU(writeData7);
+            responseWriteData = channel.transmit(writeDataCommand);
 
 
 
