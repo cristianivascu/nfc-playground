@@ -19,7 +19,7 @@ public class NfcDemo {
 //            byte[] authentication = {(byte)0xFF, (byte)0x86, 0x00, 0x00, 0x05, 0x01, 0x00, 0x04, 0x60, 0x00};
 
 
-            for(int i = 4; i<39; i+=1){
+            for(int i = 4; i < 39; i ++) {
                 byte[] readData = {(byte)0xFF, (byte)0xB0, 0x00, (byte)i, (byte)0x04};
                 CommandAPDU readDataCommand = new CommandAPDU(readData);
                 ResponseAPDU responseReadData = channel.transmit(readDataCommand);
@@ -33,6 +33,14 @@ public class NfcDemo {
                 System.out.println(sb.toString());
 
             }
+
+            byte[] writeData = {(byte)0xFF, (byte)0xD6, 0x00, (byte)0x06,  0x04, (byte)0xDD, (byte)0xDD, (byte)0xDD, (byte)0xDD};
+            CommandAPDU writeDataCommand = new CommandAPDU(writeData);
+            ResponseAPDU responseWriteData = channel.transmit(writeDataCommand);
+
+
+
+//            CommandAPDU readDataCommand = new CommandAPDU(writeData);
 
 //            CommandAPDU loadKeyCommand = new CommandAPDU(loadKey);
 //            CommandAPDU authenticationCommand = new CommandAPDU(authentication);
