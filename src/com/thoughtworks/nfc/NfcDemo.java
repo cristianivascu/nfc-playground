@@ -34,7 +34,7 @@ public class NfcDemo {
 
             }
 
-            byte[] writeData = {(byte)0xFF, (byte)0xD6, 0x00, (byte)0x06,  0x04, (byte)0xDD, (byte)0xDD, (byte)0xDD, (byte)0xDD};
+            byte[] writeData = {(byte)0xFF, (byte)0xD6, 0x00, (byte)0x06,  0x10, (byte)0xD67, (byte)0x6F, (byte)0x6F, (byte)0x2E, (byte)0x67,(byte)0x6C,(byte)0x2F,(byte)0x6B,(byte)0x47,(byte)0x6E,(byte)0x77,(byte)0x78,(byte)0x45,(byte)0xFE,(byte)0x00,(byte)0x00};
             CommandAPDU writeDataCommand = new CommandAPDU(writeData);
             ResponseAPDU responseWriteData = channel.transmit(writeDataCommand);
 
